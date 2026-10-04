@@ -1,0 +1,36 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.session
+*.session-journal
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+.npm-cache/
+.cache/
+.test-tools/
+*.tsbuildinfo
+
+# Runtime data
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.log
+*.log.*
+backups/
+tmp/
+temp/
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

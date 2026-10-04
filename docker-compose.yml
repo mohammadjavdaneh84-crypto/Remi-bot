@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:18.0-bookworm
+    environment:
+      POSTGRES_DB: remi
+      POSTGRES_USER: remi
+      POSTGRES_PASSWORD: local-development-only
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U remi -d remi']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - remi_postgres:/var/lib/postgresql
+
+  app:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://remi:local-development-only@postgres:5432/remi
+      PORT: '3000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+    init: true
+
+volumes:
+  remi_postgres:

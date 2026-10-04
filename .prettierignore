@@ -1,0 +1,6 @@
+Remi_Codex_Spec.md
+package-lock.json
+dist
+node_modules
+.npm-cache
+.test-tools

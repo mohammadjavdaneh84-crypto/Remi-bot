@@ -1,0 +1,39 @@
+{
+  "name": "remi",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.21.0 <27"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "tsx --test tests/*.test.ts",
+    "test:db": "tsx --test tests/integration/*.test.ts",
+    "dev": "node --env-file-if-exists=.env --import tsx src/main.ts",
+    "start": "node --env-file-if-exists=.env dist/main.js",
+    "migrate": "node --env-file-if-exists=.env --import tsx src/infrastructure/db/migrate-cli.ts",
+    "migrate:prod": "node --env-file-if-exists=.env dist/infrastructure/db/migrate-cli.js",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run build"
+  },
+  "dependencies": {
+    "@js-temporal/polyfill": "0.5.1",
+    "grammy": "1.46.0",
+    "pg": "8.23.1",
+    "pino": "10.4.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.1",
+    "@types/pg": "8.23.1",
+    "eslint": "10.12.0",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0"
+  }
+}
